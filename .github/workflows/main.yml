@@ -3,7 +3,7 @@
 name: CI-CD-Pipeline-to-AWS-ElasticBeastalk
 env:
   EB_PACKAGE_S3_BUCKET_NAME: "elasticbeanstalk-eu-central-1-227451225657"
-  EB_APPLICATTION_NAME     : "MyFlask-php"
+  EB_APPLICATION_NAME     : "MyFlask-php"
   EB_ENVIRONMENT_NAME      : "MyflaskPhp-env"
   DEPLOY_PACKAGE_NAME      : "flask_app_${{ github.sha }}.zip"
   AWS_REGION_NAME          : "eu-central-1" 
@@ -61,7 +61,7 @@ jobs:
    - name: Create new ElasticBeanstalk Application Version
      run : 
       aws elasticbeanstalk create-application-version \
-      --application-name ${{ env.EB_APPLICATTION_NAME }} \
+      --application-name ${{ env.EB_APPLICATION_NAME }} \
       --source-bundle S3Bucket="${{ env.EB_PACKAGE_S3_BUCKET_NAME }}",S3Key="${{ env.DEPLOY_PACKAGE_NAME }}" \
       --version-label "Ver-${{ github.sha }}" \
       --description "CoimmitSHA-${{ github.sha }}"
